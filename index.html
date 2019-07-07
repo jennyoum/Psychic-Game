@@ -7,7 +7,8 @@
     <title>Psychic Game</title>
 </head>
 <body>
-    <h1>Guess what letter I'm thinking of</h1>
+    <h1>The Psychic Game</h1>
+    <h2>Guess what letter I'm thinking of</h2>
     <p id="score"></p>
     <p id="letter"></p>
     <p id="wins"></p>
@@ -29,6 +30,13 @@
     document.onkeyup = function(event){
         var playerInput = event.key.toLowerCase();
         var randomLetter = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+        if (playerInput===randomLetter){
+            wins++
+            updateWins()
+        }
+        else {
+            updateguessesLeft()
+        }
     }
     function updateWins(){
         document.querySelector("#wins").innerHTML = "Wins: " + wins;
@@ -40,7 +48,11 @@
         document.querySelector("#guessesLeft").innerHTML = "Guesses left: " - guessesLeft;
     }
 
-    
+    winsDisplay.textContent = "Wins: " + wins;
+    lossesDisplay.textContent = "Losses: " + losses;
+    guessesLeftDisplay.textContent = "guessesLeft: " - guessesLeft
+
+
 
     </script>
 </body>
