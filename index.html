@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Psychic Game</title>
+</head>
+<body>
+    <h1>Guess what letter I'm thinking of</h1>
+    <p id="score"></p>
+    <p id="letter"></p>
+    <p id="wins"></p>
+    <p id="losses"></p>
+    <p id="guessesLeft"></p>
+
+    <script type="text/javascript">
+    var letterChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var score = 0;
+    var wins = 0;
+    var losses = 0;
+    var guessesLeft = 0;
+    var letterIndex = 0;
+
+    var winsDisplay = document.querySelector("#wins");
+    var lossesDisplay = document.querySelector("#losses");
+    var guessesLeftDisplay = document.querySelector("#guessesLeft");
+
+    document.onkeyup = function(event){
+        var playerInput = event.key.toLowerCase();
+        var randomLetter = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+    }
+    function updateWins(){
+        document.querySelector("#wins").innerHTML = "Wins: " + wins;
+    }
+    function updateLosses(){
+        document.querySelector("#losses").innerHTML = "Losses: " + losses;
+    }
+    function updateguessesLeft(){
+        document.querySelector("#guessesLeft").innerHTML = "Guesses left: " - guessesLeft;
+    }
+
+    
+
+    </script>
+</body>
+</html>
