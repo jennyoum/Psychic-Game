@@ -9,48 +9,68 @@
 <body>
     <h1>The Psychic Game</h1>
     <h2>Guess what letter I'm thinking of</h2>
-    <p id="score"></p>
     <p id="letter"></p>
-    <p id="wins"></p>
-    <p id="losses"></p>
-    <p id="guessesLeft"></p>
+    <p id="wins">Wins: </p>
+    <p id="losses">Losses: </p>
+    <p id="guessesLeft">Guesses Left: </p>
+    <p id="guessesMade">Your Guesses So Far: </p>
 
     <script type="text/javascript">
     var letterChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-    var score = 0;
-    var wins = 0;
-    var losses = 0;
-    var guessesLeft = 0;
-    var letterIndex = 0;
+    var randomLetter;
+    var win = 0;
+    var loss = 0;
+    var guessLeft = chances;
+    var guessMade = 0;
+    var chances = 5;
 
     var winsDisplay = document.querySelector("#wins");
     var lossesDisplay = document.querySelector("#losses");
     var guessesLeftDisplay = document.querySelector("#guessesLeft");
+    var guessesMadeDisplay = document.querySelector("#guessesMade");
 
-    document.onkeyup = function(event){
-        var playerInput = event.key.toLowerCase();
-        var randomLetter = letterChoices[Math.floor(Math.random() * letterChoices.length)];
-        if (playerInput===randomLetter){
-            wins++
-            updateWins()
-        }
-        else {
-            updateguessesLeft()
-        }
+    function startGame(){
+        console.log("wins: " + wins);
+        console.log("losses: " + losses);
+        console.log("guessesMade: " + guessesMade);
+        console.log("guessesLeft: " + guessesLeft);
+        randomLetter = letterChoices[Math.floor(Math.random() * letterChoices.length)];
+        guessesMade = 0;
+        guessLeft = chances;
+        alert("Let's Play!!!!");
     }
+    startGame();
     function updateWins(){
-        document.querySelector("#wins").innerHTML = "Wins: " + wins;
+        document.querySelector("#wins").innerHTML = "wins: " + win;
     }
     function updateLosses(){
-        document.querySelector("#losses").innerHTML = "Losses: " + losses;
+        document.querySelector("#losses").innerHTML = "losses: " + loss;
     }
     function updateguessesLeft(){
-        document.querySelector("#guessesLeft").innerHTML = "Guesses left: " - guessesLeft;
+        document.querySelector("#guessesLeft").innerHTML = "guessesLeft: " - guessLeft;
     }
+    document.onkeyup = function(event){
+        var playerInput = event.key;
+        if (playerInput==randomLetter){
+            alert("Correct!")
+            win = win +1
+            updateWins()
+            startGame();
+        }
+        else {
+            alert("Incorrect!")
+            guessesMade = guessMade;
+            guessesLeft = guessLeft - 1;
+            if (guessesLeft == 0){
+                alert("You lose!");
+                loss = loss + 1;
+                startGame();
+            }
+        }
+    }
+    
 
-    winsDisplay.textContent = "Wins: " + wins;
-    lossesDisplay.textContent = "Losses: " + losses;
-    guessesLeftDisplay.textContent = "guessesLeft: " - guessesLeft
+  
 
 
 
