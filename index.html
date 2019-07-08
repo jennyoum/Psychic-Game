@@ -13,7 +13,7 @@
     <p id="wins">WINS: </p>
     <p id="losses">LOSSES: </p>
     <p id="guessesLeft">GUESSES LEFT: </p>
-    <p id="guessesMade">GUESSES MADE: </p>
+    <span>GUESSES MADE: </span><span id="guessesMade"></span>
 
     <script type="text/javascript">
     var letterChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
@@ -34,7 +34,7 @@
         console.log("Your losses: " + loss);
         console.log("Your Guesses So Far: " + guessMade);
         randomLetter = letterChoices[Math.floor(Math.random() * letterChoices.length)];
-        guessesMade = 0;
+        guessesMade = "";
         guessLeft = guesses;
         alert("Let's Play!!!!");
     }
@@ -50,7 +50,7 @@
         else {
             alert("Incorrect!");
             updateguessesLeft();
-            updateguessesMade();
+            updateguessesMade(playerInput);
             
             if (guessLeft == 0){
                 alert("You lose!");
@@ -67,10 +67,13 @@
         document.querySelector("#losses").innerHTML = "losses: " + loss;
     }
     function updateguessesLeft(){
-        document.querySelector("#guessesLeft").innerHTML = "guessesLeft: " - guesses;
+        guessLeft--;
+        document.querySelector("#guessesLeft").innerHTML = "Guesses Left: " + guessLeft;
     }
-    function updateguessesMade(){
-        document.querySelector("#guessesMade").innerHTML = "guessesMade: " + guessMade;
+    function updateguessesMade(letter){
+       guessMade = guessMade.concat(letter);
+       console.log(guessMade);
+         document.querySelector("#guessesMade").innerHTML = guessMade;
     }
 
 
