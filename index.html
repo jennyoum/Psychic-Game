@@ -10,19 +10,19 @@
     <h1>The Psychic Game</h1>
     <h2>Guess what letter I'm thinking of</h2>
     <p id="letter"></p>
-    <p id="wins">Wins: </p>
-    <p id="losses">Losses: </p>
-    <p id="guessesLeft">Guesses Left: </p>
-    <p id="guessesMade">Your Guesses So Far: </p>
+    <p id="wins">WINS: </p>
+    <p id="losses">LOSSES: </p>
+    <p id="guessesLeft">GUESSES LEFT: </p>
+    <p id="guessesMade">GUESSES MADE: </p>
 
     <script type="text/javascript">
     var letterChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
     var randomLetter;
     var win = 0;
     var loss = 0;
-    var guessLeft = chances;
-    var guessMade = 0;
-    var chances = 5;
+    var guessLeft = guesses;
+    var guessMade = "";
+    var guesses = 5;
 
     var winsDisplay = document.querySelector("#wins");
     var lossesDisplay = document.querySelector("#losses");
@@ -30,16 +30,36 @@
     var guessesMadeDisplay = document.querySelector("#guessesMade");
 
     function startGame(){
-        console.log("wins: " + wins);
-        console.log("losses: " + losses);
-        console.log("guessesMade: " + guessesMade);
-        console.log("guessesLeft: " + guessesLeft);
+        console.log("Your wins: " + win);
+        console.log("Your losses: " + loss);
+        console.log("Your Guesses So Far: " + guessMade);
         randomLetter = letterChoices[Math.floor(Math.random() * letterChoices.length)];
         guessesMade = 0;
-        guessLeft = chances;
+        guessLeft = guesses;
         alert("Let's Play!!!!");
     }
     startGame();
+    document.onkeyup = function(event){
+        var playerInput = event.key;
+        if (playerInput===randomLetter){
+            alert("Correct!");
+            win = win + 1
+            updateWins();
+            startGame();
+        }
+        else {
+            alert("Incorrect!");
+            updateguessesLeft();
+            updateguessesMade();
+            
+            if (guessLeft == 0){
+                alert("You lose!");
+                loss = loss + 1;
+                updateLosses();
+                startGame();
+            }
+        }
+    }    
     function updateWins(){
         document.querySelector("#wins").innerHTML = "wins: " + win;
     }
@@ -47,27 +67,14 @@
         document.querySelector("#losses").innerHTML = "losses: " + loss;
     }
     function updateguessesLeft(){
-        document.querySelector("#guessesLeft").innerHTML = "guessesLeft: " - guessLeft;
+        document.querySelector("#guessesLeft").innerHTML = "guessesLeft: " - guesses;
     }
-    document.onkeyup = function(event){
-        var playerInput = event.key;
-        if (playerInput==randomLetter){
-            alert("Correct!")
-            win = win +1
-            updateWins()
-            startGame();
-        }
-        else {
-            alert("Incorrect!")
-            guessesMade = guessMade;
-            guessesLeft = guessLeft - 1;
-            if (guessesLeft == 0){
-                alert("You lose!");
-                loss = loss + 1;
-                startGame();
-            }
-        }
+    function updateguessesMade(){
+        document.querySelector("#guessesMade").innerHTML = "guessesMade: " + guessMade;
     }
+
+
+    
     
 
   
